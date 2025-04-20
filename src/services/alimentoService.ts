@@ -1,9 +1,13 @@
 import { alimentosBase } from "../Alimentos";
 import { Alimento } from "../models/Alimento";
+import { DynamoDBService } from "./dynamoDBService";
 
 let alimentos: Alimento[] = alimentosBase;
 
-export const fetchAlimentos = (): Promise<Alimento[]> => {
+export const fetchAlimentos = async (): Promise<Alimento[]> => {
+  const dynamoDBService: DynamoDBService = new DynamoDBService();
+  const atole_con_leche = await dynamoDBService.getItem("Alimento", { alimentoId: "atole_con_leche" });
+  console.log(atole_con_leche);
   return new Promise((resolve) => {
     setTimeout(() => resolve(alimentos), 500);
   });

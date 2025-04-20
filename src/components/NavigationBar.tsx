@@ -32,7 +32,7 @@ const NavigationBar: React.FC = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Menu
+                Menus
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="menuDropdown">
                 <li>
@@ -57,7 +57,7 @@ const NavigationBar: React.FC = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Ingrediente
+                Ingredientes
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="ingredienteDropdown">
                 <li>
@@ -82,7 +82,7 @@ const NavigationBar: React.FC = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Alimento
+                Alimentos
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="alimentoDropdown">
                 <li>
