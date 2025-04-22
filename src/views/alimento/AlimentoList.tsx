@@ -19,13 +19,19 @@ const AlimentoList: React.FC = () => {
     if (window.confirm("¿Estás seguro de eliminar este alimento?")) {
       await deleteAlimento(alimentoId);
       setAlimentos((prev) => prev.filter((a) => a.alimentoId !== alimentoId));
-      alert("Alimento eliminado");
     }
   };
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Lista de Alimentos</h2>
+      <h2 className="mb-4">
+        Lista de Alimentos{" "}
+        <span className="badge badge-success">
+          <Link to={`/alimentos/form`} className="btn btn-sm btn-success">
+            + Agregar
+          </Link>
+        </span>
+      </h2>
       <table className="table table-striped">
         <thead>
           <tr>

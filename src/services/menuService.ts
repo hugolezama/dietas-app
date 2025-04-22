@@ -1,44 +1,29 @@
 import { Menu } from "../models/Menu";
+import { dynamoDBService } from "./dynamoDBService";
 
-// Datos dummy iniciales para Menus
-let menus: Menu[] = [
-  {
-    menuId: "MENU-13-SABADO",
-    nombre: "Menu 13 Sabado",
-  },
-];
-
-export const fetchMenus = (): Promise<Menu[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(menus), 500);
-  });
+export const fetchMenus = async (): Promise<Menu[]> => {
+  const items = await dynamoDBService.scanTable("Menu");
+  return items as Menu[];
 };
 
-/** Guarda (crea o actualiza) un menú de  */
-export const saveMenu = (menu: Menu): Promise<Menu> => {
-  return new Promise((resolve) => {
-    const index = menus.findIndex((m) => m.menuId === menu.menuId);
-    if (index > -1) {
-      menus[index] = menu;
-    } else {
-      menus.push(menu);
-    }
-    setTimeout(() => resolve(menu), 500);
-  });
+export const saveMenu = async (menu: Menu): Promise<Menu> => {
+  if (!menu.menuId) {
+    menu.menuId = menu.nombre
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9_]/g, "");
+  }
+  await dynamoDBService.putItem("Menu", menu);
+  return menu;
 };
 
-/** Elimina un menú */
-export const deleteMenu = (menuId: string): Promise<void> => {
-  return new Promise((resolve) => {
-    menus = menus.filter((m) => m.menuId !== menuId);
-    setTimeout(() => resolve(), 500);
-  });
+export const deleteMenu = async (menuId: string): Promise<void> => {
+  await dynamoDBService.deleteItem("Menu", { menuId });
 };
 
 /** Obtiene un menú de  específico por su ID */
-export const getMenuById = (menuId: string): Promise<Menu | undefined> => {
-  return new Promise((resolve) => {
-    const menu = menus.find((m) => m.menuId === menuId);
-    setTimeout(() => resolve(menu), 500);
-  });
+export const getMenuById = async (menuId: string): Promise<Menu> => {
+  const item = await dynamoDBService.getItem("Menu", { menuId });
+  return item as Menu;
 };

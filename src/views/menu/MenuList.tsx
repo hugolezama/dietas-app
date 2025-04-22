@@ -15,7 +15,6 @@ const MenuList: React.FC = () => {
     if (window.confirm("¿Estás seguro de eliminar este Menu?")) {
       await deleteMenu(menuId);
       setMenus((prev) => prev.filter((m) => m.menuId !== menuId));
-      alert("Menu eliminado");
     }
   };
 
@@ -25,7 +24,14 @@ const MenuList: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Lista de Menus</h2>
+      <h2 className="mb-4">
+        Lista de Menus{" "}
+        <span className="badge badge-success">
+          <Link to={`/menus/form`} className="btn btn-sm btn-success">
+            + Agregar
+          </Link>
+        </span>
+      </h2>
       <table className="table table-striped">
         <thead>
           <tr>

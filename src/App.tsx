@@ -41,7 +41,7 @@ const App: React.FC = () => {
           <Route path="/menus/form" element={<MenuForm />} />
 
           {/* Ruta por defecto */}
-          <Route path="/" element={<Navigate to="/alimentos" />} />
+          <Route path="/" element={<Navigate to="/menus" />} />
         </Routes>
       </div>
     </Router>

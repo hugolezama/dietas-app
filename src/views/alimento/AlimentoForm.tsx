@@ -36,7 +36,6 @@ const AlimentoForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await saveAlimento(alimento);
-    alert("Alimento guardado");
     navigate("/alimentos");
   };
 
@@ -67,6 +66,7 @@ const AlimentoForm: React.FC = () => {
             className="form-control"
             value={alimento.nombre}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -80,6 +80,7 @@ const AlimentoForm: React.FC = () => {
             className="form-control"
             value={alimento.unidad}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

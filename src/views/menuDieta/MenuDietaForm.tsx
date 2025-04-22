@@ -45,7 +45,7 @@ const MenuDietaForm: React.FC = () => {
         }
       });
     }
-  }, [menuDietaIdParam]);
+  }, [menuDietaIdParam, menuIdParam]);
 
   // Manejo de cambios en campos simples (menuId y tipoDieta)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +99,6 @@ const MenuDietaForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await saveMenuDieta(menuDieta);
-    alert("MenuDieta guardado");
     navigate("/menu-dieta?menuId=" + menuIdParam);
   };
 

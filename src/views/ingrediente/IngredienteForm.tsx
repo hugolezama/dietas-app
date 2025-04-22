@@ -46,14 +46,12 @@ const IngredienteForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await saveIngrediente(ingrediente);
-    alert("Ingrediente guardado");
     navigate("/ingredientes");
   };
 
   const handleDelete = async () => {
     if (window.confirm("¿Estás seguro de eliminar este ingrediente?")) {
       await deleteIngrediente(ingrediente.ingredienteId);
-      alert("Ingrediente eliminado");
       navigate("/ingredientes");
     }
   };
@@ -63,18 +61,28 @@ const IngredienteForm: React.FC = () => {
       <h2 className="mb-4">{ingredienteIdParam ? "Modificar Ingrediente" : "Crear Ingrediente"}</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="ingredienteId" className="form-label">
-            Ingrediente ID
-          </label>
           <input
-            type="text"
+            type="hidden"
             id="ingredienteId"
             name="ingredienteId"
             className="form-control"
-            placeholder="atole_con_leche_harina"
             value={ingrediente.ingredienteId}
             onChange={handleChange}
             readOnly={!!ingredienteIdParam}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="nombre" className="form-label">
+            Nombre
+          </label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            className="form-control"
+            value={ingrediente.nombre}
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -87,11 +95,12 @@ const IngredienteForm: React.FC = () => {
             className="form-select"
             value={ingrediente.alimentoId}
             onChange={handleChange}
+            required
           >
             <option value="">Seleccione un alimento</option>
             {alimentos.map((alimento) => (
               <option key={alimento.alimentoId} value={alimento.alimentoId}>
-                {alimento.nombre}
+                {alimento.nombre} ({alimento.unidad})
               </option>
             ))}
           </select>
@@ -105,26 +114,13 @@ const IngredienteForm: React.FC = () => {
             id="cantidad"
             name="cantidad"
             className="form-control"
-            placeholder="0.25"
             value={ingrediente.cantidad}
             onChange={handleChange}
             step="any"
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">
-            Nombre
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            className="form-control"
-            placeholder="Atole con leche (harina de arroz)"
-            value={ingrediente.nombre}
-            onChange={handleChange}
-          />
-        </div>
+
         <button type="submit" className="btn btn-primary me-2">
           Guardar
         </button>

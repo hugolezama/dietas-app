@@ -10,13 +10,6 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-interface DynamoDBConfig {
-  region: string;
-  accessKeyId?: string;
-  secretAccessKey?: string;
-  endpoint?: string;
-}
-
 interface QueryParams {
   indexName?: string;
   keyConditionExpression: string;
@@ -26,7 +19,7 @@ interface QueryParams {
   scanIndexForward?: boolean;
 }
 
-export class DynamoDBService {
+class DynamoDBService {
   private readonly client: DynamoDBClient;
 
   constructor() {
@@ -38,8 +31,6 @@ export class DynamoDBService {
         secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY ?? "local",
       },
     };
-
-    console.log("Initializing DynamoDBService with config:", clientConfig);
 
     this.client = new DynamoDBClient(clientConfig);
   }
@@ -148,6 +139,7 @@ export class DynamoDBService {
    * @returns Resultado de la operación
    */
   public async deleteItem(tableName: string, key: Record<string, any>): Promise<boolean> {
+    console.log("Deleting item with key:", marshall(key));
     try {
       const command = new DeleteItemCommand({
         TableName: tableName,
@@ -188,3 +180,5 @@ export class DynamoDBService {
     }
   }
 }
+
+export const dynamoDBService: DynamoDBService = new DynamoDBService();

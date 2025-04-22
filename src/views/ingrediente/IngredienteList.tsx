@@ -28,13 +28,19 @@ const IngredienteList: React.FC = () => {
     if (window.confirm("¿Estás seguro de eliminar este ingrediente?")) {
       await deleteIngrediente(ingredienteId);
       setIngredientes((prev) => prev.filter((i) => i.ingredienteId !== ingredienteId));
-      alert("Ingrediente eliminado");
     }
   };
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Lista de Ingredientes</h2>
+      <h2 className="mb-4">
+        Lista de Ingredientes{" "}
+        <span className="badge badge-success">
+          <Link to={`/ingredientes/form`} className="btn btn-sm btn-success">
+            + Agregar
+          </Link>
+        </span>
+      </h2>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -46,7 +52,6 @@ const IngredienteList: React.FC = () => {
         </thead>
         <tbody>
           {ingredientes.map((ingrediente) => {
-            // Busca el alimento correspondiente por alimentoId
             const alimentoEncontrado = alimentos.find((a) => a.alimentoId === ingrediente.alimentoId);
             return (
               <tr key={ingrediente.ingredienteId}>

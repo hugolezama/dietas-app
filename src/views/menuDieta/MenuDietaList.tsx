@@ -39,7 +39,6 @@ const MenuDietaList: React.FC = () => {
     if (window.confirm("¿Estás seguro de eliminar este MenuDieta?")) {
       await deleteMenuDieta(menuDietaId);
       setMenuDietas((prev) => prev.filter((m) => m.menuDietaId !== menuDietaId));
-      alert("MenuDieta eliminado");
     }
   };
 
@@ -49,7 +48,7 @@ const MenuDietaList: React.FC = () => {
         Lista de Dietas{" "}
         <span className="badge badge-success">
           <Link to={`/menu-dieta/form?menuId=${menuIdParam}`} className="btn btn-sm btn-success">
-            + Dieta
+            + Agregar
           </Link>
         </span>
       </h2>
@@ -117,7 +116,7 @@ const MenuDietaList: React.FC = () => {
                 </td>
                 <td>
                   <Link
-                    to={`/menu-dieta/form?menuDietaId=${menu.menuDietaId}`}
+                    to={`/menu-dieta/form?menuDietaId=${menu.menuDietaId}&&menuId=${menu.menuId}`}
                     className="btn btn-sm btn-primary me-2"
                   >
                     Editar

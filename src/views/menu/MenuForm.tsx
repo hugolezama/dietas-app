@@ -35,7 +35,6 @@ const MenuForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await saveMenu(menu);
-    alert("Menu guardado");
     navigate("/menus");
   };
 
@@ -66,6 +65,7 @@ const MenuForm: React.FC = () => {
             className="form-control"
             value={menu.nombre}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

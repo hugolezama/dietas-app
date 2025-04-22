@@ -7,7 +7,7 @@ const NavigationBar: React.FC = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="Bootstrap" width="100" height="45" />
+          <img src={logo} alt="Bootstrap" width="120" height="55" />
         </Link>
         <button
           className="navbar-toggler"
@@ -42,7 +42,7 @@ const NavigationBar: React.FC = () => {
                 </li>
                 <li>
                   <NavLink className="dropdown-item" to="/menus/form">
-                    Crear/Modificar Menu
+                    Crear Menu
                   </NavLink>
                 </li>
               </ul>
@@ -67,7 +67,7 @@ const NavigationBar: React.FC = () => {
                 </li>
                 <li>
                   <NavLink className="dropdown-item" to="/ingredientes/form">
-                    Crear/Modificar Ingrediente
+                    Crear Ingrediente
                   </NavLink>
                 </li>
               </ul>
@@ -92,7 +92,7 @@ const NavigationBar: React.FC = () => {
                 </li>
                 <li>
                   <NavLink className="dropdown-item" to="/alimentos/form">
-                    Crear/Modificar Alimento
+                    Crear Alimento
                   </NavLink>
                 </li>
               </ul>

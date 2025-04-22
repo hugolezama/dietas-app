@@ -1,34 +1,23 @@
-import { alimentosBase } from "../Alimentos";
 import { Alimento } from "../models/Alimento";
-import { DynamoDBService } from "./dynamoDBService";
-
-let alimentos: Alimento[] = alimentosBase;
+import { dynamoDBService } from "./dynamoDBService";
 
 export const fetchAlimentos = async (): Promise<Alimento[]> => {
-  const dynamoDBService: DynamoDBService = new DynamoDBService();
-  const atole_con_leche = await dynamoDBService.getItem("Alimento", { alimentoId: "atole_con_leche" });
-  console.log(atole_con_leche);
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(alimentos), 500);
-  });
+  const items = await dynamoDBService.scanTable("Alimento");
+  return items as Alimento[];
 };
 
-export const saveAlimento = (alimento: Alimento): Promise<Alimento> => {
-  return new Promise((resolve) => {
-    // Si existe, actualizar; en caso contrario, agregar
-    const index = alimentos.findIndex((a) => a.alimentoId === alimento.alimentoId);
-    if (index > -1) {
-      alimentos[index] = alimento;
-    } else {
-      alimentos.push(alimento);
-    }
-    setTimeout(() => resolve(alimento), 500);
-  });
+export const saveAlimento = async (alimento: Alimento): Promise<Alimento> => {
+  if (!alimento.alimentoId) {
+    alimento.alimentoId = alimento.nombre
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9_]/g, "");
+  }
+  await dynamoDBService.putItem("Alimento", alimento);
+  return alimento;
 };
 
-export const deleteAlimento = (alimentoId: string): Promise<void> => {
-  return new Promise((resolve) => {
-    alimentos = alimentos.filter((a) => a.alimentoId !== alimentoId);
-    setTimeout(() => resolve(), 500);
-  });
+export const deleteAlimento = async (alimentoId: string): Promise<void> => {
+  await dynamoDBService.deleteItem("Alimento", { alimentoId });
 };
