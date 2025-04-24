@@ -50,6 +50,9 @@ const MenuList: React.FC = () => {
                 </Link>
               </td>
               <td>
+                <Link to={`/menus/calculate?menuId=${menu.menuId}`} className="btn btn-sm btn-success me-2">
+                  Calcular
+                </Link>
                 <Link to={`/menus/form?menuId=${menu.menuId}`} className="btn btn-sm btn-primary me-2">
                   Editar
                 </Link>

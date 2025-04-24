@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { DIETAS } from "../../dietas";
 import { Ingrediente } from "../../models/Ingrediente";
 import { Menu } from "../../models/Menu";
 import { MenuDieta } from "../../models/MenuDieta";
@@ -8,6 +9,8 @@ import { getMenuDietaById, saveMenuDieta } from "../../services/menuDietaService
 import { getMenuById } from "../../services/menuService";
 
 type MealType = "DESAYUNO" | "COMIDA" | "CENA";
+
+const dietas = DIETAS;
 
 const MenuDietaForm: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -48,7 +51,7 @@ const MenuDietaForm: React.FC = () => {
   }, [menuDietaIdParam, menuIdParam]);
 
   // Manejo de cambios en campos simples (menuId y tipoDieta)
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setMenuDieta((prev) => ({
       ...prev,
@@ -171,7 +174,7 @@ const MenuDietaForm: React.FC = () => {
   );
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 mb-4">
       <h2 className="mb-4">{menuDietaIdParam ? "Modificar Dieta" : "Crear Dieta"}</h2>
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="menuDietaId" value={menuDieta.menuDietaId} />
@@ -200,22 +203,33 @@ const MenuDietaForm: React.FC = () => {
           <label htmlFor="tipoDieta" className="form-label">
             Tipo de Dieta
           </label>
-          <input
-            type="text"
+          <select
             id="tipoDieta"
             name="tipoDieta"
-            className="form-control"
+            className="form-select"
             value={menuDieta.tipoDieta}
             onChange={handleChange}
-          />
+            required
+            disabled={!!menuDietaIdParam} // Disable if menuDietaIdParam is populated
+          >
+            <option value="">Seleccione un tipo de dieta</option>
+            {dietas.map((dieta, index) => (
+              <option key={dieta.name} value={dieta.name}>
+                {dieta.name}
+              </option>
+            ))}
+          </select>
         </div>
         <h4>Ingredientes por Comida</h4>
         {renderMealSection("DESAYUNO")}
         {renderMealSection("COMIDA")}
         {renderMealSection("CENA")}
-        <button type="submit" className="btn btn-primary me-2">
+        <button type="submit" className="btn btn-sm btn-primary me-2">
           Guardar
         </button>
+        <Link to={`/menu-dieta?menuId=${menuIdParam}`} className="btn btn-sm btn-secondary me-2">
+          Cancelar
+        </Link>
       </form>
     </div>
   );

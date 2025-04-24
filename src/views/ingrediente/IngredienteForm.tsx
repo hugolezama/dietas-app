@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Alimento } from "../../models/Alimento";
 import { Ingrediente } from "../../models/Ingrediente";
 import { fetchAlimentos } from "../../services/alimentoService";
@@ -121,14 +121,12 @@ const IngredienteForm: React.FC = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary me-2">
+        <button type="submit" className="btn btn-sm btn-primary me-2">
           Guardar
         </button>
-        {ingredienteIdParam && (
-          <button type="button" className="btn btn-danger" onClick={handleDelete}>
-            Eliminar
-          </button>
-        )}
+        <Link to={`/ingredientes`} className="btn btn-sm btn-secondary me-2">
+          Cancelar
+        </Link>
       </form>
     </div>
   );

@@ -14,6 +14,8 @@ import IngredienteList from "./views/ingrediente/IngredienteList";
 import MenuDietaForm from "./views/menuDieta/MenuDietaForm";
 import MenuDietaList from "./views/menuDieta/MenuDietaList";
 
+import CalcularForm from "./views/menu/CalcularForm";
+import CantidadesList from "./views/menu/CantidadesList";
 import MenuForm from "./views/menu/MenuForm";
 import MenuList from "./views/menu/MenuList";
 
@@ -39,6 +41,10 @@ const App: React.FC = () => {
 
           <Route path="/menus" element={<MenuList />} />
           <Route path="/menus/form" element={<MenuForm />} />
+
+          <Route path="/menus/calculate" element={<CalcularForm />} />
+
+          <Route path="/cantidades" element={<CantidadesList />} />
 
           {/* Ruta por defecto */}
           <Route path="/" element={<Navigate to="/menus" />} />

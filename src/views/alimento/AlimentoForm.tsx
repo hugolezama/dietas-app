@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Alimento } from "../../models/Alimento";
 import { fetchAlimentos, saveAlimento } from "../../services/alimentoService";
 
 const AlimentoForm: React.FC = () => {
+  const unidades = ["Litro", "Vaso", "Ración", "Pieza", "Rebanada"];
+
   const [alimento, setAlimento] = useState<Alimento>({
     alimentoId: "",
     nombre: "",
@@ -40,7 +42,7 @@ const AlimentoForm: React.FC = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 mb-4">
       <h2 className="mb-4">{alimentoIdParam ? "Modificar Alimento" : "Crear Alimento"}</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -73,19 +75,28 @@ const AlimentoForm: React.FC = () => {
           <label htmlFor="unidad" className="form-label">
             Unidad
           </label>
-          <input
-            type="text"
+          <select
             id="unidad"
             name="unidad"
-            className="form-control"
+            className="form-select"
             value={alimento.unidad}
-            onChange={handleChange}
+            onChange={(e) => setAlimento((prev) => ({ ...prev, unidad: e.target.value }))}
             required
-          />
+          >
+            <option value="">Seleccione una unidad</option>
+            {unidades.map((unidad) => (
+              <option key={unidad} value={unidad}>
+                {unidad}
+              </option>
+            ))}
+          </select>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-sm btn-primary me-2">
           Guardar
         </button>
+        <Link to={`/alimentos`} className="btn btn-sm btn-secondary me-2">
+          Cancelar
+        </Link>
       </form>
     </div>
   );

@@ -23,79 +23,22 @@ const NavigationBar: React.FC = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav me-auto">
             {/* Menu */}
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="menuDropdown"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/menus">
                 Menus
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="menuDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/menus">
-                    Lista de Menus
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/menus/form">
-                    Crear Menu
-                  </NavLink>
-                </li>
-              </ul>
             </li>
             {/* Ingrediente */}
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="ingredienteDropdown"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/ingredientes">
                 Ingredientes
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="ingredienteDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/ingredientes">
-                    Lista de Ingredientes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/ingredientes/form">
-                    Crear Ingrediente
-                  </NavLink>
-                </li>
-              </ul>
             </li>
             {/* Alimento */}
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="alimentoDropdown"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/alimentos">
                 Alimentos
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="alimentoDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/alimentos">
-                    Lista de Alimentos
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/alimentos/form">
-                    Crear Alimento
-                  </NavLink>
-                </li>
-              </ul>
             </li>
           </ul>
         </div>

@@ -45,7 +45,7 @@ const MenuDietaList: React.FC = () => {
   return (
     <div className="container mt-4">
       <h2 className="mb-4">
-        Lista de Dietas{" "}
+        Lista de Dietas - {menus.find((menu) => menu.menuId === menuIdParam)?.nombre ?? "Menu"}
         <span className="badge badge-success">
           <Link to={`/menu-dieta/form?menuId=${menuIdParam}`} className="btn btn-sm btn-success">
             + Agregar
@@ -53,10 +53,9 @@ const MenuDietaList: React.FC = () => {
         </span>
       </h2>
 
-      <table className="table table-striped">
+      <table className="table table-striped table-sm">
         <thead>
           <tr>
-            <th>Menu</th>
             <th>Tipo de Dieta</th>
             <th>Desayuno</th>
             <th>Comida</th>
@@ -66,15 +65,12 @@ const MenuDietaList: React.FC = () => {
         </thead>
         <tbody>
           {menuDietas.map((menu) => {
-            const nombreMenu = menus.find((m) => m.menuId === menu.menuId)?.nombre;
-
             return (
               <tr key={menu.menuDietaId}>
-                <td>{nombreMenu ?? menu.menuId}</td>
                 <td>{menu.tipoDieta}</td>
                 <td>
                   {menu.comidas.DESAYUNO?.L?.length > 0 ? (
-                    <ul>
+                    <ul style={{ paddingLeft: 0 }}>
                       {menu.comidas.DESAYUNO.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
@@ -88,7 +84,7 @@ const MenuDietaList: React.FC = () => {
                 </td>
                 <td>
                   {menu.comidas.COMIDA?.L?.length > 0 ? (
-                    <ul>
+                    <ul style={{ paddingLeft: 0 }}>
                       {menu.comidas.COMIDA.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
@@ -102,7 +98,7 @@ const MenuDietaList: React.FC = () => {
                 </td>
                 <td>
                   {menu.comidas.CENA?.L?.length > 0 ? (
-                    <ul>
+                    <ul style={{ paddingLeft: 0 }}>
                       {menu.comidas.CENA.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
