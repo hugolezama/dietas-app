@@ -43,13 +43,13 @@ const MenuList: React.FC = () => {
         <tbody>
           {menus.map((menu) => (
             <tr key={menu.menuId}>
-              <td>{menu.nombre}</td>
+              <td style={{ minWidth: "175px" }}>{menu.nombre}</td>
               <td>
                 <Link to={`/menu-dieta?menuId=${menu.menuId}`} className="btn btn-sm btn-primary me-2">
                   Dietas
                 </Link>
               </td>
-              <td>
+              <td style={{ minWidth: "250px" }}>
                 <Link to={`/menus/calculate?menuId=${menu.menuId}`} className="btn btn-sm btn-success me-2">
                   Calcular
                 </Link>

@@ -68,9 +68,9 @@ const MenuDietaList: React.FC = () => {
             return (
               <tr key={menu.menuDietaId}>
                 <td>{menu.tipoDieta}</td>
-                <td>
+                <td style={{ minWidth: "200px" }}>
                   {menu.comidas.DESAYUNO?.L?.length > 0 ? (
-                    <ul style={{ paddingLeft: 0 }}>
+                    <ul style={{ paddingLeft: 20 }}>
                       {menu.comidas.DESAYUNO.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
@@ -82,9 +82,9 @@ const MenuDietaList: React.FC = () => {
                     <div>(Vacio)</div>
                   )}
                 </td>
-                <td>
+                <td style={{ minWidth: "200px" }}>
                   {menu.comidas.COMIDA?.L?.length > 0 ? (
-                    <ul style={{ paddingLeft: 0 }}>
+                    <ul style={{ paddingLeft: 20 }}>
                       {menu.comidas.COMIDA.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
@@ -96,9 +96,9 @@ const MenuDietaList: React.FC = () => {
                     <div>(Vacio)</div>
                   )}
                 </td>
-                <td>
+                <td style={{ minWidth: "200px" }}>
                   {menu.comidas.CENA?.L?.length > 0 ? (
-                    <ul style={{ paddingLeft: 0 }}>
+                    <ul style={{ paddingLeft: 20 }}>
                       {menu.comidas.CENA.L.map((item) => (
                         <li key={item}>
                           {ingredientes.find((ingrediente) => ingrediente.ingredienteId === item)?.nombre ??
@@ -110,7 +110,7 @@ const MenuDietaList: React.FC = () => {
                     <div>(Vacio)</div>
                   )}
                 </td>
-                <td>
+                <td style={{ minWidth: "150px" }}>
                   <Link
                     to={`/menu-dieta/form?menuDietaId=${menu.menuDietaId}&&menuId=${menu.menuId}`}
                     className="btn btn-sm btn-primary me-2"
